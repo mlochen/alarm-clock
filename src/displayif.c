@@ -98,12 +98,13 @@ void displayif__update(void)
 
     /* brightness */
     uint8_t b = lightsens__get_brightness();
+    backlight__set_brightness(b);
+    /*
     display__set_DDRAM_address(0x4C);
     display__write_data('0' + ((b / 100) % 10));
     display__write_data('0' + ((b / 10) % 10));
     display__write_data('0' + (b % 10));
-    backlight__set_brightness(b);
-
+    */
 
     flash_count++;
     if (flash_count > 49)
