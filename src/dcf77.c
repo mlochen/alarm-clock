@@ -124,7 +124,7 @@ static void process_data(void)
     time.day_of_month = (temp & 0x0F) + (temp >> 4) * 10;
 
     temp = data[5] >> 2;
-    temp &= 0x03;
+    temp &= 0x07;
     time.day_of_week = temp;
 
     temp = data[5] >> 5;
