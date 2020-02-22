@@ -20,6 +20,7 @@
 
 #include "alarm.h"
 #include "backlight.h"
+#include "dcf77.h"
 #include "display.h"
 #include "lightsens.h"
 #include "time.h"
@@ -42,12 +43,11 @@ void displayif__init(void)
 void displayif__update(void)
 {
     static uint8_t flash_count;
+    display__display_clear();
 
     struct time time = time__get_time();
-
     /* print the time */
     display__set_DDRAM_address(0x00);
-    display__display_clear();
     print_number(time.hour);
     display__write_data(':');
     print_number(time.minute);
@@ -65,7 +65,6 @@ void displayif__update(void)
     print_number(time.year);
 
     struct alarm alarm = alarm__get_alarm_data();
-
     /* print alarm data */
     display__set_DDRAM_address(0x0A);
     if (alarm.enabled)
@@ -94,6 +93,15 @@ void displayif__update(void)
     else
     {
         print_number(alarm.minute);
+    }
+
+    /* bad signal indicator */
+    /* if the dcf77 module did not receive a valid signal for over an hour
+     * show an indicator next to the time */
+    display__set_DDRAM_address(0x08);
+    if (dcf77__get_invalid_period() > 360000)
+    {
+        display__write_data('!');
     }
 
     /* brightness */

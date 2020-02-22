@@ -18,7 +18,10 @@
 #ifndef __DCF77_H__
 #define __DCF77_H__
 
+#include <stdint.h>
+
 void dcf77__init(void);
 void dcf77__update(void);
+uint32_t dcf77__get_invalid_period(void);
 
 #endif
