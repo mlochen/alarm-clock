@@ -1,5 +1,5 @@
 # alarm clock
-Code for an alarm clock with DCF77 time source
+Code and schematic for an alarm clock with DCF77 time source
 
 ![alarm clock](alarm_clock.jpg)
 
@@ -9,3 +9,6 @@ Code for an alarm clock with DCF77 time source
 
 ## Call graph
 ![call graph](doc/data_flow.png)
+
+## Schematic
+![schematic](doc/schematic.png)
